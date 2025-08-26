@@ -7,6 +7,23 @@ from PIL import Image
 import qrcode
 import dropbox
 
+APP_KEY = st.secrets["vcf89yjvlnew3zu"]
+APP_SECRET = st.secrets["jgxe5so0lotuqd8"]
+REFRESH_TOKEN = st.secrets["ehHRexbEWocAAAAAAAAAAcUU2WX7tg_MRvs8rkMDKpUwQVeWVqiMKkT_a_Ins17-"]
+
+dbx = dropbox.Dropbox(
+    oauth2_refresh_token=REFRESH_TOKEN,
+    app_key=APP_KEY,
+    app_secret=APP_SECRET,
+)
+
+# test chiaro in app
+try:
+    acct = dbx.users_get_current_account()
+    st.caption(f"Connesso a Dropbox come: {acct.name.display_name}")
+except dropbox.exceptions.AuthError:
+    st.error("Autenticazione Dropbox fallita. Ricontrolla KEY/SECRET/REFRESH_TOKEN e i permessi (read/write/metadata).")
+    st.stop()
 # ============ Config ============
 TITLE = st.secrets.get("APP_TITLE", "Wedding Wall")
 DEFAULT_EVENT_CODE = st.secrets.get("DEFAULT_EVENT_CODE", "CristianoLorena")
