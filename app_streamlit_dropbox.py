@@ -30,7 +30,7 @@ TITLE = st.secrets.get("APP_TITLE", "Wedding Wall")
 DEFAULT_EVENT_CODE = st.secrets.get("DEFAULT_EVENT_CODE", "CristianoLorena")
 DROPBOX_TOKEN = st.secrets["DROPBOX_TOKEN"]  # deve esistere nei Secrets!
 
-EVENT_CODE = st.experimental_get_query_params().get("code", [DEFAULT_EVENT_CODE])[0]
+EVENT_CODE = st.query_params.get("code", DEFAULT_EVENT_CODE)
 APP_FOLDER = f"/wedding/{EVENT_CODE}"           # su Dropbox
 INDEX_PATH = f"{APP_FOLDER}/index.json"         # metadati (likes, nickname, msg)
 
